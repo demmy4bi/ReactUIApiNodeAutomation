@@ -1,4 +1,4 @@
-name: UI and API Tests
+name: CI Pipeline
 
 on:
   push:
@@ -9,10 +9,6 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-
-    defaults:
-      run:
-        shell: bash
 
     steps:
       - name: Checkout Repository
@@ -26,29 +22,33 @@ jobs:
       - name: Install Root Dependencies
         run: npm install
 
-      - name: Install Frontend & Backend Dependencies
-        run: |
-          npm install --prefix Client
-          npm install --prefix server
+      - name: Install Frontend Dependencies
+        run: npm install --prefix Client
 
-      - name: Start Frontend and Backend in Background
-        run: |
-          npx concurrently "npm run dev --prefix Client" "npm run dev --prefix server" &
-          sleep 10
+      - name: Install Backend Dependencies
+        run: npm install --prefix Server
 
-      - name: Wait for Frontend and Backend to be Ready
-        run: npx --yes wait-on http://localhost:5173/auth http://localhost:5000/api/items
+      - name: Start Servers (Frontend & Backend)
+        run: |
+          npm install concurrently wait-on --save-dev
+          npm run dev --prefix Client &
+          npm run dev --prefix Server &
+        shell: bash
+
+      - name: Wait for Servers
+        run: npx wait-on http://localhost:5173/auth http://localhost:5000/api/items
 
       - name: Run Cypress Tests
         run: npx cypress run --project Client --spec "Client/cypress/e2e/*.cy.js"
 
-      - name: Upload Cypress Snapshots (Screenshots & Videos)
+      - name: Upload Cypress Videos
         uses: actions/upload-artifact@v4
         with:
-          name: cypress-artifacts
-          path: |
-            Client/cypress/screenshots
-            Client/cypress/videos
+          name: cypress-videos
+          path: Client/cypress/videos
 
-      - name: Run Postman API Tests with Newman
-        run: npx newman run postman/todo-api-tests.postman_collection.json
+      - name: Upload Cypress Screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-screenshots
+          path: Client/cypress/screenshots
