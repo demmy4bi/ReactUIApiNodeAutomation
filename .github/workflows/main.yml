@@ -46,13 +46,7 @@ jobs:
 
       - name: Run Cypress Tests
         run: npm run cy:run
-
-      - name: Upload Cypress Videos
-        uses: actions/upload-artifact@v4
-        with:
-          name: cypress-videos
-          path: Client/cypress/videos
-
+        
       - name: Upload Cypress Screenshots
         uses: actions/upload-artifact@v4
         with:
