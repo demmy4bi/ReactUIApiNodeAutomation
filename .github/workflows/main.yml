@@ -1,50 +1,60 @@
-name: UI & API Automation Tests
+name: Fullstack Test Pipeline
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
   pull_request:
+    branches: [main]
 
 jobs:
   test:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+      
+        working-directory: ./
 
     steps:
-      - name:  Checkout code
-        uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v3
 
-      - name:  Set up Node.js
-        uses: actions/setup-node@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
           node-version: 18
 
-      - name:  Install root dependencies
+      - name: Install root dependencies
         run: npm install
 
-      - name:  Install client (Cypress) dependencies
+      - name: Install frontend (client) dependencies
+        run: npm install
         working-directory: ./Client
+
+      - name: Install backend (server) dependencies
         run: npm install
+        working-directory: ./Server
 
-      - name:  Install Newman for API testing
-        run: npm install -g newman
+      - name: Install Cypress and Newman globally
+        run: |
+          npm install -g cypress
+          npm install -g newman
 
-      - name:  Start frontend & backend
+      - name: Start fullstack app
         run: npm start &
         env:
           CI: true
 
-      - name:  Wait for servers to be ready
-        run: npx wait-on http://localhost:5173/auth http://localhost:5000/api/items
+      - name: Wait for services to boot
+        run: sleep 25
 
-      - name:  Run Cypress UI tests
-        run: npx cypress run --project Client --spec "Client/cypress/e2e/ValidateLogin.cy.js,Client/cypress/e2e/CreateItem.cy.js,Client/cypress/e2e/UpdateItem.cy.js,Client/cypress/e2e/DeleteItem.cy.js"
+      - name: Run Cypress Tests
+        run: npm run cy:run
 
-      - name:  Run Postman API Tests via Newman
-        run: npm run api:test
-
-      - name:  Upload Cypress Snapshots
+      - name: Upload Cypress Screenshots
         uses: actions/upload-artifact@v4
         with:
-          name: cypress-snapshots
+          name: cypress-screenshots
           path: Client/cypress/screenshots
+
+      - name: Run Postman API Tests
+        run: npm run api:test
