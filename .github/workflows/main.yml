@@ -27,7 +27,7 @@ jobs:
 
       - name: Install frontend (client) dependencies
         run: npm install
-        working-directory: ./client
+        working-directory: ./Client
 
       - name: Install backend (server) dependencies
         run: npm install
@@ -53,7 +53,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: cypress-screenshots
-          path: client/cypress/screenshots
+          path: Client/cypress/screenshots
 
       - name: Run Postman API Tests
         run: npm run api:test
