@@ -1,4 +1,4 @@
-name: UI and API Tests
+name: CI Pipeline
 
 on:
   push:
@@ -49,7 +49,26 @@ jobs:
         run: npm run cy:run
         working-directory: ./client
 
-      - name: Run Postman API Tests
-        uses: matt-ball/newman-action@v1
+      - name: Install Newman and Reporters
+        run: npm install -g newman newman-reporter-html newman-reporter-junit
+
+      - name: Run Postman API Tests and Generate Reports
+        run: |
+          mkdir -p reports
+          newman run ./postman/collection.json \
+            -e ./postman/env.json \
+            --reporters cli,html,junit \
+            --reporter-html-export reports/report.html \
+            --reporter-junit-export reports/report.xml
+
+      - name: Upload HTML Report
+        uses: actions/upload-artifact@v4
         with:
-          collection: ./postman/collection.json
+          name: postman-html-report
+          path: reports/report.html
+
+      - name: Upload JUnit Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: postman-junit-report
+          path: reports/report.xml
