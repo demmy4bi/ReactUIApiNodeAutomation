@@ -24,7 +24,6 @@ dist-ssr
 *.sw?
 
 # Cypress output (keep screenshots, ignore videos/downloads)
-cypress/videos/
 cypress/downloads/
 
 # Editor config

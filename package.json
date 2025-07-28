@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "concurrently \"npm run dev --prefix client\" \"npm run dev --prefix server\"",
     "cy:run": "npx cypress run --project Client --spec \"Client/cypress/e2e/ValidateLogin.cy.js,Client/cypress/e2e/CreateItem.cy.js,Client/cypress/e2e/UpdateItem.cy.js,Client/cypress/e2e/DeleteItem.cy.js\"",
-    "api:test": "newman run Postman/NodejsAPI_Backend.postman_collection.json"
+    "api:test": "mkdir -p reports && newman run Postman/NodejsAPI_Backend.postman_collection.json --reporters cli,html,junit --reporter-html-export reports/postman-report.html --reporter-junit-export reports/postman-report.xml"
   },
   "keywords": [],
   "author": "",
