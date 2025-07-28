@@ -33,9 +33,12 @@ jobs:
       - name: Install Backend Dependencies
         run: npm install --prefix Server
 
+      - name: Install global wait-on
+        run: npm install -g wait-on
+
       - name: Start Servers (Frontend & Backend)
         run: |
-          npm install concurrently wait-on --save-dev
+          npm install concurrently --save-dev
           npm run dev --prefix Client &
           npm run dev --prefix Server &
         shell: bash
@@ -45,7 +48,7 @@ jobs:
           JWT_KEY: ${{ secrets.JWT_KEY }}
 
       - name: Wait for Servers
-        run: npx wait-on http://localhost:5173/auth http://localhost:4000/api/items
+        run: wait-on http://localhost:5173/auth http://localhost:4000/api/items
 
       - name: Run Cypress Tests
         run: npx cypress run --project Client --spec "Client/cypress/e2e/*.cy.js"
