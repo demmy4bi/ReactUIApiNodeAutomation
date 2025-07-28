@@ -59,8 +59,8 @@ jobs:
           name: cypress-screenshots
           path: Client/cypress/screenshots
 
-      - name: Install Newman and Reporters
-        run: npm install -g newman newman-reporter-html newman-reporter-junit
+      - name: Install Newman and HTML Reporter
+        run: npm install -g newman newman-reporter-html
 
       - name: Run Postman API Tests with Newman
         run: |
