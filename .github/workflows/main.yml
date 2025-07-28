@@ -1,4 +1,4 @@
-name: CI Pipeline
+name: UI and API Tests
 
 on:
   push:
@@ -16,7 +16,7 @@ jobs:
       JWT_KEY: ${{ secrets.JWT_KEY }}
 
     steps:
-      - name: Checkout code
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
       - name: Set up Node.js
@@ -24,51 +24,63 @@ jobs:
         with:
           node-version: 18
 
-      - name: Install root dev dependencies
-        run: npm install --save-dev concurrently wait-on
-
-      - name: Install frontend dependencies
+      - name: Install Root Dependencies
         run: npm install
-        working-directory: ./Client
 
-      - name: Install backend dependencies
-        run: npm install
-        working-directory: ./Server
+      - name: Install Frontend Dependencies
+        run: npm install --prefix Client
 
-      - name: Start frontend and backend
+      - name: Install Backend Dependencies
+        run: npm install --prefix Server
+
+      - name: Start Servers (Frontend & Backend)
         run: |
-          npm run dev --prefix client &
-          npm run dev --prefix server &
-          npx wait-on http://localhost:5173/auth http://localhost:4000/api/items
+          npm install concurrently wait-on --save-dev
+          npm run dev --prefix Client &
+          npm run dev --prefix Server &
+        shell: bash
         env:
           PORT: ${{ secrets.PORT }}
           MONGO_URL: ${{ secrets.MONGO_URL }}
           JWT_KEY: ${{ secrets.JWT_KEY }}
 
-      - name: Run Cypress UI Tests
-        run: npm run cy:run
-        working-directory: ./Client
+      - name: Wait for Servers
+        run: npx wait-on http://localhost:5173/auth http://localhost:4000/api/items
+
+      - name: Run Cypress Tests
+        run: npx cypress run --project Client --spec "Client/cypress/e2e/*.cy.js"
+
+      - name: Upload Cypress Videos
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-videos
+          path: Client/cypress/videos
+
+      - name: Upload Cypress Screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-screenshots
+          path: Client/cypress/screenshots
 
       - name: Install Newman and Reporters
         run: npm install -g newman newman-reporter-html newman-reporter-junit
 
-      - name: Run Postman API Tests and Generate Reports
+      - name: Run Postman API Tests with Newman
         run: |
           mkdir -p reports
-          newman run ./postman/collection.json \
-            -e ./postman/env.json \
+          newman run Postman/NodejsAPI_Backend.postman_collection.json \
             --reporters cli,html,junit \
-            --reporter-html-export reports/report.html \
-            --reporter-junit-export reports/report.xml
+            --reporter-html-export reports/postman-report.html \
+            --reporter-junit-export reports/postman-report.xml
 
-      - name: Upload HTML Report
+      - name: Upload Postman HTML Report
         uses: actions/upload-artifact@v4
         with:
           name: postman-html-report
-          path: reports/report.html
+          path: reports/postman-report.html
 
-      - name: Upload JUnit Report
+      - name: Upload Postman JUnit Report
         uses: actions/upload-artifact@v4
         with:
           name: postman-junit-report
-          path: reports/report.xml
+          path: reports/postman-report.xml
