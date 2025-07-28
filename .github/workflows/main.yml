@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      PORT: ${{ secrets.PORT }}
+      PORT: 4000
       MONGO_URL: ${{ secrets.MONGO_URL }}
       JWT_KEY: ${{ secrets.JWT_KEY }}
 
@@ -43,7 +43,7 @@ jobs:
           npm run dev --prefix Server &
         shell: bash
         env:
-          PORT: ${{ secrets.PORT }}
+          PORT: 4000
           MONGO_URL: ${{ secrets.MONGO_URL }}
           JWT_KEY: ${{ secrets.JWT_KEY }}
 
