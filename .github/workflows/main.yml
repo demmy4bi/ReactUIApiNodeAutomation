@@ -2,42 +2,53 @@ name: UI and API Tests
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
   pull_request:
+    branches: [main]
 
 jobs:
   test:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        shell: bash
+
     steps:
-      - name: Checkout repo
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: 18
 
-      - name: Install root dependencies
+      - name: Install Root Dependencies
         run: npm install
 
-      - name: Start Frontend and Backend
-        run: npm start &
-        env:
-          CI: true
+      - name: Install Frontend & Backend Dependencies
+        run: |
+          npm install --prefix Client
+          npm install --prefix server
 
-      - name: Wait for servers to be ready
-        run: npx wait-on http://localhost:5173/auth http://localhost:5000/api/items
+      - name: Start Frontend and Backend in Background
+        run: |
+          npx concurrently "npm run dev --prefix Client" "npm run dev --prefix server" &
+          sleep 10
 
-      - name: Run Cypress UI tests
-        run: npm run cy:run
+      - name: Wait for Frontend and Backend to be Ready
+        run: npx --yes wait-on http://localhost:5173/auth http://localhost:5000/api/items
 
-      - name: Run Postman API tests
-        run: npm run api:test
+      - name: Run Cypress Tests
+        run: npx cypress run --project Client --spec "Client/cypress/e2e/*.cy.js"
 
-      - name: Upload Cypress snapshots
+      - name: Upload Cypress Snapshots (Screenshots & Videos)
         uses: actions/upload-artifact@v4
         with:
-          name: cypress-snapshots
-          path: Client/cypress/screenshots
+          name: cypress-artifacts
+          path: |
+            Client/cypress/screenshots
+            Client/cypress/videos
+
+      - name: Run Postman API Tests with Newman
+        run: npx newman run postman/todo-api-tests.postman_collection.json
