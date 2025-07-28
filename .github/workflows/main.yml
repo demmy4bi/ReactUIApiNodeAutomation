@@ -29,11 +29,11 @@ jobs:
 
       - name: Install frontend dependencies
         run: npm install
-        working-directory: ./client
+        working-directory: ./Client
 
       - name: Install backend dependencies
         run: npm install
-        working-directory: ./server
+        working-directory: ./Server
 
       - name: Start frontend and backend
         run: |
@@ -47,7 +47,7 @@ jobs:
 
       - name: Run Cypress UI Tests
         run: npm run cy:run
-        working-directory: ./client
+        working-directory: ./Client
 
       - name: Install Newman and Reporters
         run: npm install -g newman newman-reporter-html newman-reporter-junit
