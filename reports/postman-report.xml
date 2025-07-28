@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="NodejsAPI_Backend" tests="25" time="4.747">
+  <testsuite name="Login / Login – Valid credentials– Success" id="a3463805-8b1f-4605-aba8-b83efeb7a0ea" timestamp="2025-07-28T09:45:47.552Z" tests="5" failures="0" errors="0" time="0.261">
+    <testcase name="Response status code is 200" time="0.261" classname="LoginLoginValidCredentialsSuccess"/>
+    <testcase name="Response time is less than 500ms" time="0.261" classname="LoginLoginValidCredentialsSuccess"/>
+    <testcase name="Response body contains name, token, and message" time="0.261" classname="LoginLoginValidCredentialsSuccess"/>
+    <testcase name="Token is a non-empty string" time="0.261" classname="LoginLoginValidCredentialsSuccess"/>
+    <testcase name="Response Message is 'Login Successful'" time="0.261" classname="LoginLoginValidCredentialsSuccess"/>
+  </testsuite>
+  <testsuite name="Login / Login – Empty password field– Error" id="32962031-7a37-404a-91ec-03b77cfc8900" timestamp="2025-07-28T09:45:47.552Z" tests="3" failures="0" errors="0" time="0.221">
+    <testcase name="Response status code is 500" time="0.221" classname="LoginLoginEmptyPasswordFieldError"/>
+    <testcase name="Response time is less than 3000ms" time="0.221" classname="LoginLoginEmptyPasswordFieldError"/>
+    <testcase name="Response message is correct" time="0.221" classname="LoginLoginEmptyPasswordFieldError"/>
+  </testsuite>
+  <testsuite name="Login / Login – Empty email field– Error" id="14132202-c684-4904-8ead-1ed28f4a42b8" timestamp="2025-07-28T09:45:47.552Z" tests="3" failures="0" errors="0" time="0.148">
+    <testcase name="Response status code is 500" time="0.148" classname="LoginLoginEmptyEmailFieldError"/>
+    <testcase name="Response time is less than 3000ms" time="0.148" classname="LoginLoginEmptyEmailFieldError"/>
+    <testcase name="Response message is correct" time="0.148" classname="LoginLoginEmptyEmailFieldError"/>
+  </testsuite>
+  <testsuite name="Login / Login – Invalid password– Error" id="3457c9f7-88f8-4de5-bfdb-aee2d010f2bd" timestamp="2025-07-28T09:45:47.552Z" tests="3" failures="0" errors="0" time="0.236">
+    <testcase name="Response status code is 500" time="0.236" classname="LoginLoginInvalidPasswordError"/>
+    <testcase name="Response time is less than 3000ms" time="0.236" classname="LoginLoginInvalidPasswordError"/>
+    <testcase name="Response message is correct" time="0.236" classname="LoginLoginInvalidPasswordError"/>
+  </testsuite>
+  <testsuite name="Login / Login – Invalid email– Error" id="300b84f1-1865-40a9-8135-8098f686529b" timestamp="2025-07-28T09:45:47.552Z" tests="3" failures="0" errors="0" time="0.150">
+    <testcase name="Response status code is 500" time="0.150" classname="LoginLoginInvalidEmailError"/>
+    <testcase name="Response time is less than 3000ms" time="0.150" classname="LoginLoginInvalidEmailError"/>
+    <testcase name="Response message is correct" time="0.150" classname="LoginLoginInvalidEmailError"/>
+  </testsuite>
+  <testsuite name="Items / Get Items – Valid inputs– Success" id="04f04547-2dbc-47bc-a11f-219c2b27c5dd" timestamp="2025-07-28T09:45:47.552Z" tests="0" failures="0" errors="0" time="0.450"/>
+  <testsuite name="Items / Get Items –  Invalid BearerToken– Error" id="49fe435f-c6c7-438e-a949-d24588e5a5e5" timestamp="2025-07-28T09:45:47.552Z" tests="3" failures="0" errors="0" time="0.003">
+    <testcase name="Response status code is 500" time="0.003" classname="ItemsGetItemsInvalidBearerTokenError"/>
+    <testcase name="Response time is less than 1000ms" time="0.003" classname="ItemsGetItemsInvalidBearerTokenError"/>
+    <testcase name="Response message is correct" time="0.003" classname="ItemsGetItemsInvalidBearerTokenError"/>
+  </testsuite>
+  <testsuite name="Items / Get Items – UnAuthorized User– Error" id="3c0d5963-88ae-4808-beac-03423106cb67" timestamp="2025-07-28T09:45:47.552Z" tests="3" failures="0" errors="0" time="0.003">
+    <testcase name="Response status code is 500" time="0.003" classname="ItemsGetItemsUnAuthorizedUserError"/>
+    <testcase name="Response time is less than 1000ms" time="0.003" classname="ItemsGetItemsUnAuthorizedUserError"/>
+    <testcase name="Response message is correct" time="0.003" classname="ItemsGetItemsUnAuthorizedUserError"/>
+  </testsuite>
+  <testsuite name="Create_Item / Create Item – Valid inputs– Success" id="40adaa2d-7caf-4454-873a-c58d98c0d34f" timestamp="2025-07-28T09:45:47.552Z" tests="4" failures="0" errors="0" time="0.501">
+    <testcase name="Status code is 200" time="0.501" classname="CreateItemCreateItemValidInputsSuccess"/>
+    <testcase name="Response time is less than 1 second" time="0.501" classname="CreateItemCreateItemValidInputsSuccess"/>
+    <testcase name="Response has a success message" time="0.501" classname="CreateItemCreateItemValidInputsSuccess"/>
+    <testcase name="Post object is valid" time="0.501" classname="CreateItemCreateItemValidInputsSuccess"/>
+  </testsuite>
+  <testsuite name="Create_Item / Create Item – Invalid BearerToken– Error" id="345f1c74-a1ec-43b6-8397-4f748c463a00" timestamp="2025-07-28T09:45:47.552Z" tests="3" failures="0" errors="0" time="0.004">
+    <testcase name="Response status code is 500" time="0.004" classname="CreateItemCreateItemInvalidBearerTokenError"/>
+    <testcase name="Response time is less than 1000ms" time="0.004" classname="CreateItemCreateItemInvalidBearerTokenError"/>
+    <testcase name="Response message is correct" time="0.004" classname="CreateItemCreateItemInvalidBearerTokenError"/>
+  </testsuite>
+  <testsuite name="Create_Item / Create Item – UnAuthorized User– Error" id="dfa3dcaf-a3f8-4cf9-8c15-b2f34be67a4e" timestamp="2025-07-28T09:45:47.552Z" tests="3" failures="0" errors="0" time="0.009">
+    <testcase name="Response status code is 500" time="0.009" classname="CreateItemCreateItemUnAuthorizedUserError"/>
+    <testcase name="Response time is less than 1000ms" time="0.009" classname="CreateItemCreateItemUnAuthorizedUserError"/>
+    <testcase name="Response message is correct" time="0.009" classname="CreateItemCreateItemUnAuthorizedUserError"/>
+  </testsuite>
+  <testsuite name="Create_Item / Create Item – Empty title– Error" id="b96a54b5-9a8a-4b16-b5a0-070228b87b20" timestamp="2025-07-28T09:45:47.552Z" tests="5" failures="0" errors="0" time="0.176">
+    <testcase name="Status code is 200 - StatusCode Validation" time="0.176" classname="CreateItemCreateItemEmptyTitleError"/>
+    <testcase name="Error message is 'Post validation failed: title: Don't enter empty task.'" time="0.176" classname="CreateItemCreateItemEmptyTitleError"/>
+    <testcase name="Error name is 'ValidationError'" time="0.176" classname="CreateItemCreateItemEmptyTitleError"/>
+    <testcase name="Error details for 'title' are present" time="0.176" classname="CreateItemCreateItemEmptyTitleError"/>
+    <testcase name="Title error fields are correct" time="0.176" classname="CreateItemCreateItemEmptyTitleError"/>
+  </testsuite>
+  <testsuite name="Create_Item / Create Item – Empty description– Error" id="f8590582-a7f9-4f53-89b1-2f3e156c3f1f" timestamp="2025-07-28T09:45:47.552Z" tests="5" failures="0" errors="0" time="0.164">
+    <testcase name="Status code is 200 - StatusCode Validation" time="0.164" classname="CreateItemCreateItemEmptyDescriptionError"/>
+    <testcase name="Error message is 'Post validation failed: description: Don't enter empty description.'" time="0.164" classname="CreateItemCreateItemEmptyDescriptionError"/>
+    <testcase name="Error name is 'ValidationError'" time="0.164" classname="CreateItemCreateItemEmptyDescriptionError"/>
+    <testcase name="Error details for 'description' are present" time="0.164" classname="CreateItemCreateItemEmptyDescriptionError"/>
+    <testcase name="Description error fields are correct" time="0.164" classname="CreateItemCreateItemEmptyDescriptionError"/>
+  </testsuite>
+  <testsuite name="Update_Item / Update Item – Valid inputs– Success" id="2a2dd9ce-db3e-42d2-a893-bbe8a65349e7" timestamp="2025-07-28T09:45:47.552Z" tests="6" failures="0" errors="0" time="0.575">
+    <testcase name="Status code is 200" time="0.575" classname="UpdateItemUpdateItemValidInputsSuccess"/>
+    <testcase name="Response time is less than 1000ms" time="0.575" classname="UpdateItemUpdateItemValidInputsSuccess"/>
+    <testcase name="Response message is correct" time="0.575" classname="UpdateItemUpdateItemValidInputsSuccess"/>
+    <testcase name="Title in response matches title in request" time="0.575" classname="UpdateItemUpdateItemValidInputsSuccess"/>
+    <testcase name="Post structure is valid" time="0.575" classname="UpdateItemUpdateItemValidInputsSuccess"/>
+    <testcase name="Author structure is valid" time="0.575" classname="UpdateItemUpdateItemValidInputsSuccess"/>
+  </testsuite>
+  <testsuite name="Update_Item / Update Item – Invalid BearerToken– Error" id="bf11f490-98c7-49e7-aa0f-541606e6e438" timestamp="2025-07-28T09:45:47.552Z" tests="3" failures="0" errors="0" time="0.004">
+    <testcase name="Response status code is 500" time="0.004" classname="UpdateItemUpdateItemInvalidBearerTokenError"/>
+    <testcase name="Response time is less than 1000ms" time="0.004" classname="UpdateItemUpdateItemInvalidBearerTokenError"/>
+    <testcase name="Response message is correct" time="0.004" classname="UpdateItemUpdateItemInvalidBearerTokenError"/>
+  </testsuite>
+  <testsuite name="Update_Item / Update Item – UnAuthorized User– Error" id="0bc9e161-27e0-4682-95a4-65288ce79006" timestamp="2025-07-28T09:45:47.552Z" tests="3" failures="0" errors="0" time="0.004">
+    <testcase name="Response status code is 500" time="0.004" classname="UpdateItemUpdateItemUnAuthorizedUserError"/>
+    <testcase name="Response time is less than 1000ms" time="0.004" classname="UpdateItemUpdateItemUnAuthorizedUserError"/>
+    <testcase name="Response message is correct" time="0.004" classname="UpdateItemUpdateItemUnAuthorizedUserError"/>
+  </testsuite>
+  <testsuite name="Update_Item / Update Item – Empty ID– Error" id="e75998e9-4e3a-49e9-84cc-a443594e1ed4" timestamp="2025-07-28T09:45:47.552Z" tests="3" failures="0" errors="0" time="0.175">
+    <testcase name="Response status code is 500" time="0.175" classname="UpdateItemUpdateItemEmptyIdError"/>
+    <testcase name="Response time is less than 1000ms" time="0.175" classname="UpdateItemUpdateItemEmptyIdError"/>
+    <testcase name="Response message is correct" time="0.175" classname="UpdateItemUpdateItemEmptyIdError"/>
+  </testsuite>
+  <testsuite name="Update_Item / Update Item – Empty title– Error" id="14308142-ab98-4668-88ed-6ca3d567b3be" timestamp="2025-07-28T09:45:47.552Z" tests="3" failures="0" errors="0" time="0.308">
+    <testcase name="Response status code is 500" time="0.308" classname="UpdateItemUpdateItemEmptyTitleError"/>
+    <testcase name="Response time is less than 1000ms" time="0.308" classname="UpdateItemUpdateItemEmptyTitleError"/>
+    <testcase name="Response message is correct" time="0.308" classname="UpdateItemUpdateItemEmptyTitleError"/>
+  </testsuite>
+  <testsuite name="Update_Item / Update Item – Empty description– Error" id="6740ac83-808a-45a6-bc7b-01bc616a12b3" timestamp="2025-07-28T09:45:47.552Z" tests="3" failures="0" errors="0" time="0.287">
+    <testcase name="Response status code is 500" time="0.287" classname="UpdateItemUpdateItemEmptyDescriptionError"/>
+    <testcase name="Response time is less than 1000ms" time="0.287" classname="UpdateItemUpdateItemEmptyDescriptionError"/>
+    <testcase name="Response message is correct" time="0.287" classname="UpdateItemUpdateItemEmptyDescriptionError"/>
+  </testsuite>
+  <testsuite name="Update_Item / Update Item – Invalid Id– Error" id="8903d559-4f75-498f-b928-29a5c363e029" timestamp="2025-07-28T09:45:47.552Z" tests="3" failures="0" errors="0" time="0.156">
+    <testcase name="Response status code is 500" time="0.156" classname="UpdateItemUpdateItemInvalidIdError"/>
+    <testcase name="Response time is less than 1000ms" time="0.156" classname="UpdateItemUpdateItemInvalidIdError"/>
+    <testcase name="Response message is correct" time="0.156" classname="UpdateItemUpdateItemInvalidIdError"/>
+  </testsuite>
+  <testsuite name="Delete_Item / Delete Item – Valid inputs– Success" id="134b509b-999e-4b32-ab2b-10db0ef33265" timestamp="2025-07-28T09:45:47.552Z" tests="3" failures="0" errors="0" time="0.601">
+    <testcase name="Status code is 200" time="0.601" classname="DeleteItemDeleteItemValidInputsSuccess"/>
+    <testcase name="Message confirms deletion" time="0.601" classname="DeleteItemDeleteItemValidInputsSuccess"/>
+    <testcase name="Post structure is valid" time="0.601" classname="DeleteItemDeleteItemValidInputsSuccess"/>
+  </testsuite>
+  <testsuite name="Delete_Item / Delete Item – Invalid BearerToken– Error" id="516eb949-9c5d-4334-8f64-404b52e73f4a" timestamp="2025-07-28T09:45:47.552Z" tests="3" failures="0" errors="0" time="0.003">
+    <testcase name="Response status code is 500" time="0.003" classname="DeleteItemDeleteItemInvalidBearerTokenError"/>
+    <testcase name="Response time is less than 1000ms" time="0.003" classname="DeleteItemDeleteItemInvalidBearerTokenError"/>
+    <testcase name="Response message is correct" time="0.003" classname="DeleteItemDeleteItemInvalidBearerTokenError"/>
+  </testsuite>
+  <testsuite name="Delete_Item / Delete Item – UnAuthorized User– Error" id="a26f2718-adba-495f-99ff-ce309019a427" timestamp="2025-07-28T09:45:47.552Z" tests="3" failures="0" errors="0" time="0.005">
+    <testcase name="Response status code is 500" time="0.005" classname="DeleteItemDeleteItemUnAuthorizedUserError"/>
+    <testcase name="Response time is less than 1000ms" time="0.005" classname="DeleteItemDeleteItemUnAuthorizedUserError"/>
+    <testcase name="Response message is correct" time="0.005" classname="DeleteItemDeleteItemUnAuthorizedUserError"/>
+  </testsuite>
+  <testsuite name="Delete_Item / Delete Item – Invalid ID– Error" id="371c37a4-846c-4b98-afcf-3544460e82be" timestamp="2025-07-28T09:45:47.552Z" tests="3" failures="0" errors="0" time="0.147">
+    <testcase name="Response status code is 500" time="0.147" classname="DeleteItemDeleteItemInvalidIdError"/>
+    <testcase name="Response time is less than 1000ms" time="0.147" classname="DeleteItemDeleteItemInvalidIdError"/>
+    <testcase name="Response message is correct" time="0.147" classname="DeleteItemDeleteItemInvalidIdError"/>
+  </testsuite>
+  <testsuite name="Delete_Item / Delete Item – Empty ID– Error" id="f047e83a-a867-4db3-9be4-bb1536515fd9" timestamp="2025-07-28T09:45:47.552Z" tests="3" failures="0" errors="0" time="0.156">
+    <testcase name="Response status code is 500" time="0.156" classname="DeleteItemDeleteItemEmptyIdError"/>
+    <testcase name="Response time is less than 1000ms" time="0.156" classname="DeleteItemDeleteItemEmptyIdError"/>
+    <testcase name="Response message is correct" time="0.156" classname="DeleteItemDeleteItemEmptyIdError"/>
+  </testsuite>
+</testsuites>
