@@ -33,9 +33,6 @@ jobs:
       - name: Install Backend Dependencies
         run: npm install --prefix Server
 
-      - name: Install global wait-on
-        run: npm install -g wait-on
-
       - name: Start Servers (Frontend & Backend)
         run: |
           npm install concurrently --save-dev
@@ -47,11 +44,8 @@ jobs:
           MONGO_URL: ${{ secrets.MONGO_URL }}
           JWT_KEY: ${{ secrets.JWT_KEY }}
 
-      - name: Wait for Servers
-        run: wait-on http://localhost:5173/auth http://localhost:4000/api/items
-
       - name: Run Cypress Tests
-        run: npx cypress run --project Client --spec "Client/cypress/e2e/*.cy.js"
+        run: npm run cy:run
 
       - name: Upload Cypress Videos
         uses: actions/upload-artifact@v4
