@@ -31,7 +31,7 @@ jobs:
 
       - name: Install backend (server) dependencies
         run: npm install
-        working-directory: ./server
+        working-directory: ./Server
 
       - name: Install Cypress and Newman globally
         run: |
